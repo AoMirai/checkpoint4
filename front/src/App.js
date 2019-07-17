@@ -1,11 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom'
-import PrivateRoute from './container/PrivateRoute'
+import PrivateRoute from './container/Connection/PrivateRoute'
 import Navbar from './container/Navbar';
 import Home from './container/Home';
-import Admin from './container/Admin';
-import Visitor from './container/Visitor';
-import SignIn from './container/SignIn'
+import AdminArtist from './container/Admin/AdminArtist';
+import AdminShow from './container/Admin/AdminShow';
+import AdminAct from './container/Admin/AdminAct'
+import SignIn from './container/Connection/SignIn'
 
 function App() {
   return (
@@ -13,11 +14,11 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/visitor" component={Visitor} />
-        <PrivateRoute path="/admin" component={Admin} />
         <Route path="/signin" component={SignIn} />
+        <PrivateRoute path="/admin/artist" component={AdminArtist}/>
+        <PrivateRoute path="/admin/act" component={AdminAct}/>
+        <PrivateRoute path="/admin/show" component={AdminShow}/>
       </Switch>
-
     </div>
   );
 }

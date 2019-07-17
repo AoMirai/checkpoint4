@@ -3,7 +3,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
-import { userRegister } from './action';
+import { userRegister } from '../../actions/user';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
