@@ -16,6 +16,10 @@ export const asyncFetchActs = () => (dispatch) => {
     .then(res => res.json())
     .then((acts) => {
       dispatch(fetchSuccessActs(acts));
+      for (let i = 0; i < acts.length; i++) {
+        const act = acts[i];
+        dispatch(asyncFetchActArtists(act.id))
+      }
     })
     .catch(() => {
       dispatch(fetchErrorActs('Erreur lors du chargement des numéros'));
@@ -41,7 +45,7 @@ export const asyncFetchActArtists = (idAct) => (dispatch) => {
     .then((actArtists) => {
       dispatch(fetchSuccessActArtists(actArtists));
     })
-    .catch(() => {
+    .catch((err) => {
       dispatch(fetchErrorActArtists('Erreur lors du chargement des artistes du numéro'));
     });
 };

@@ -11,17 +11,19 @@ export const fetchErrorArtists = err => ({
 });
 
 export const asyncFetchArtists = () => (dispatch) => {
-  console.log('action');
-
   dispatch(startFetchArtists());
   fetch('http://localhost:5000/api/artist')
-    .then(res => res.json())
-    .then((artists) => {
-      dispatch(fetchSuccessArtists(artists));
-    })
-    .catch(() => {
-      dispatch(fetchErrorArtists('Erreur lors du chargement des artistes'));
-    })
+  .then(res => res.json())
+  .then((artists) => {
+    dispatch(fetchSuccessArtists(artists));
+    for (let i = 0; i < artists.length; i++) {
+      const artist = artists[i];
+      dispatch(asyncFetchArtistAct(artist.id))
+    }
+  })
+  .catch(() => {
+    dispatch(fetchErrorArtists('Erreur lors du chargement des artistes'))
+  })
 };
 
 export const startFetchArtistAct = () => ({
@@ -37,10 +39,8 @@ export const fetchErrorArtistAct = err => ({
 });
 
 export const asyncFetchArtistAct = (idArtist) => (dispatch) => {
-  console.log('action');
-  
   dispatch(startFetchArtistAct());
-  fetch(`http://localhost:5000/api/artist/${idArtist}`)
+  fetch(`http://localhost:5000/api/artist/${idArtist}/act`)
     .then(res => res.json())
     .then((artistAct) => {
       dispatch(fetchSuccessArtistAct(artistAct));

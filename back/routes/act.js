@@ -10,10 +10,6 @@ router.get('/', (req, res) => {
   ac.description,
   ac.picture
   FROM act ac
-  JOIN act_artist aa
-  ON ac.id = aa.id_act
-  JOIN artist ar
-  ON ar.id = aa.id_artist
   `;
   connection.query(query, (err, results) => {
     if (err) {
@@ -27,7 +23,7 @@ router.get('/', (req, res) => {
 router.get('/:id/artist', (req, res) => {
   const idAct = req.params.id;
   const query = `SELECT
-  ar.id idArtist
+  ar.id idArtist,
   ac.id idAct,
   CONCAT(ar.firstname, ' ', ar.lastname) fullname
   FROM act ac
@@ -78,12 +74,16 @@ router.delete('/:id', (req, res) => {
 
 router.post('/artist', (req, res) => {
   const formData = req.body;
-  connection.query('INSERT INTO act_artist SET ?', formData, () => {
-    res.sendStatus(200);
+  connection.query('INSERT INTO act_artist SET ?', formData, (err) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
   });
 });
 
-router.delete('/:idAct/artist/idArtist', (req, res) => {
+router.delete('/:idAct/artist/:idArtist', (req, res) => {
   const { idAct } = req.params;
   const { idArtist } = req.params;
   connection.query('DELETE FROM act_artist WHERE id_act = ? AND id_artist = ?', [idAct, idArtist], (err) => {

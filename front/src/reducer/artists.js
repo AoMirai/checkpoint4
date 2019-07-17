@@ -41,9 +41,8 @@ const artists = (state = intitialState, action) => {
     }
     case 'FETCH_SUCCESS_ARTIST_ACT': {
       const artists = state.artists.map(artist => {
-        return artist.id === action.artistAct.idArtist ?  {...artist, acts: action.artistAct}: {...artist}
+        return artist.id === action.artistAct[0].idArtist ?  {...artist, acts: action.artistAct}: {...artist}
       });
-
       return {
         ...state,
         artists: artists,

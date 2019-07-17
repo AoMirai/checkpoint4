@@ -34,6 +34,7 @@ const acts = (state = intitialState, action) => {
     // Fetch list artists par act
 
     case 'START_FETCH_ACT_ARTISTS': {
+      console.log(state.acts);
       return {
         ...state,
         loading: true
@@ -41,9 +42,8 @@ const acts = (state = intitialState, action) => {
     }
     case 'FETCH_SUCCESS_ACT_ARTISTS': {
       const acts = state.acts.map(act => {
-        return act.id === action.ActArtists.idAct ?  {...act, artists: action.ActArtists}: {...act}
+        return act.id === action.actArtists[0].idAct ?  {...act, artists: action.actArtists}: {...act}
       });
-
       return {
         ...state,
         acts: acts,

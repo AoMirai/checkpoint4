@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  NotificationManager,
-} from 'react-notifications';
+import { NotificationManager } from 'react-notifications';
 import { userRegister } from '../../actions/user';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -37,7 +35,6 @@ import { bindActionCreators } from 'redux';
       throw new Error();
     })
     .then((user) => {
-      console.log(user);
       NotificationManager.success('', 'Authentification réussi.', 1000);
       userRegister(user);
       history.push('/admin')

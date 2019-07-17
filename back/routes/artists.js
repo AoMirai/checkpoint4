@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
 router.get('/:id/act', (req, res) => {
   const idArtiste = req.params.id;
   const query = `SELECT
-  ar.id idArtist
-  ac.id idAct,
+  ar.id as idArtist,
+  ac.id as idAct,
   ac.title
   FROM act ac
   JOIN act_artist aa
@@ -52,6 +52,7 @@ router.put('/:id', (req, res) => {
   const formData = req.body;
   connection.query('UPDATE artist SET ? WHERE id = ?', [formData, idArtiste], (err) => {
     if (err) {
+      console.log(err);
       res.sendStatus(500);
     } else {
       res.sendStatus(200);

@@ -23,9 +23,9 @@ class SignOut extends Component {
 
   render() {
     return (
-      <li onClick={this.disconnect}>
+      <div onClick={this.disconnect}>
         <Link to='/'>Déconnection</Link>
-      </li>
+      </div>
     )
   }
 }
