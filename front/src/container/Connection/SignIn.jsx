@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  NotificationContainer,
   NotificationManager,
 } from 'react-notifications';
 import { userRegister } from '../../actions/user';
@@ -21,7 +20,7 @@ import { bindActionCreators } from 'redux';
   }
 
   submitForm = (event) => {
-    const { userRegister, history, location: { state} } = this.props;
+    const { userRegister, history } = this.props;
     event.preventDefault();
     fetch('http://localhost:5000/api/auth/signin', {
       method: 'POST',
@@ -38,11 +37,13 @@ import { bindActionCreators } from 'redux';
       throw new Error();
     })
     .then((user) => {
+      console.log(user);
       NotificationManager.success('', 'Authentification réussi.', 1000);
       userRegister(user);
-      history.push(state.from.pathname)
+      history.push('/admin')
     })      
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       NotificationManager.error('', "Erreur d'authentification.", 3000);
     });
   }
@@ -76,7 +77,6 @@ import { bindActionCreators } from 'redux';
           </label>
           <button type="submit">Connect me !</button>
         </form>
-        <NotificationContainer />
       </div>
     )
   }

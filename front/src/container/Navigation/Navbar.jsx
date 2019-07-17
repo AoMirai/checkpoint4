@@ -1,27 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import SignOut from '../Connection/SignOut';
 
-function Navbar({token}) {
+function Navbar({ token }) {
   return (
     <div className="Navbar">
       <ul>
-        <div>
-          <li>
-            <Link to="/">Acceuil</Link>
-          </li>
-          <li>
-            <Link to="/act">Numéros</Link>
-          </li>
-          <li>
-            <Link to="/box-office">Billetterie</Link>
-          </li>
-        </div>
-        {token ? 
-        <div>
-          Admin : 
-          <li>
-            <Link to="/admin/signout">Déconnection</Link>
+      {token ?
+        <div className="nav-admin">
+          Admin :
+            <li>
+            <SignOut />
           </li>
           <li>
             <Link to="/admin/artist" >Artistes</Link>
@@ -33,9 +23,26 @@ function Navbar({token}) {
             <Link to="/admin/show" >Représentations</Link>
           </li>
         </div>
-        : ''}
+        :
+        <div className="nav-visitor">
+          <div>
+          <li>
+            <Link to="/">Acceuil</Link>
+          </li>
+          <li>
+            <Link to="/act">Numéros</Link>
+          </li>
+          <li>
+            <Link to="/box-office">Billetterie</Link>
+          </li>
+          </div>
+          <div>
+          <Link to="/signin">Admin</Link>
+          </div>
+        </div>
+      }
       </ul>
-    </div>
+    </div >
   )
 }
 

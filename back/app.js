@@ -7,7 +7,7 @@ const path = require('path');
 const cors = require('cors');
 
 const auth = require('./routes/auth');
-const artist = require('./routes/artist');
+const artists = require('./routes/artists');
 const show = require('./routes/show');
 const act = require('./routes/act');
 const city = require('./routes/city');
@@ -28,7 +28,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/auth', auth);
-app.use('/api/artist', artist);
+app.use('/api/artist', artists);
 app.use('/api/show', show);
 app.use('/api/act', act);
 app.use('/api/city', city);

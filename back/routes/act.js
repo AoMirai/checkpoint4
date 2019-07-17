@@ -27,6 +27,8 @@ router.get('/', (req, res) => {
 router.get('/:id/artist', (req, res) => {
   const idAct = req.params.id;
   const query = `SELECT
+  ar.id idArtist
+  ac.id idAct,
   CONCAT(ar.firstname, ' ', ar.lastname) fullname
   FROM act ac
   JOIN act_artist aa
@@ -81,9 +83,10 @@ router.post('/artist', (req, res) => {
   });
 });
 
-router.delete('/:id/artist', (req, res) => {
-  const idAct = req.params.id;
-  connection.query('DELETE FROM act_artist WHERE id = ?', [idAct], (err) => {
+router.delete('/:idAct/artist/idArtist', (req, res) => {
+  const { idAct } = req.params;
+  const { idArtist } = req.params;
+  connection.query('DELETE FROM act_artist WHERE id_act = ? AND id_artist = ?', [idAct, idArtist], (err) => {
     if (err) {
       res.sendStatus(500);
     } else {
