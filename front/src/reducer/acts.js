@@ -34,7 +34,6 @@ const acts = (state = intitialState, action) => {
     // Fetch list artists par act
 
     case 'START_FETCH_ACT_ARTISTS': {
-      console.log(state.acts);
       return {
         ...state,
         loading: true

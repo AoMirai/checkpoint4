@@ -1,0 +1,55 @@
+.AdminActList {
+  margin-top: 20px;
+  .titre {
+  text-align: center;
+  }
+  .add {
+    margin-left: 10px;
+  }
+  button {
+    margin: 5px;
+  }
+  .AdminAct {
+    background-color: rgba(105, 201, 121, 0.61);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+    form {
+      width: auto;
+      input {
+        width: auto;
+      }
+      textarea {
+        width: 100%;
+        height: 50%;
+      }
+    }
+    .modif {
+      padding: 5px;
+      margin: 5px;
+      background-color: rgba(255, 255, 255, 0.384);
+      border-radius: 15px;
+    }
+    .act {
+      @media (min-width: 768px) {
+        width: 45%;
+      }
+    }
+    .artist {
+      @media (min-width: 768px) {
+        width: 35%;
+      }
+    }
+    .buttons{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}

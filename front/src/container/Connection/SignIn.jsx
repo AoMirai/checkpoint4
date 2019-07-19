@@ -3,6 +3,8 @@ import { NotificationManager } from 'react-notifications';
 import { userRegister } from '../../actions/user';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Button } from 'reactstrap';
+import './SignIn.scss';
 
  class SignIn extends Component {
   constructor(props) {
@@ -53,6 +55,7 @@ import { bindActionCreators } from 'redux';
         <form onSubmit={this.submitForm}>
           <label htmlFor="login">
             Login
+            </label>
           <input
               type="text"
               id="login"
@@ -60,10 +63,11 @@ import { bindActionCreators } from 'redux';
               value={login}
               onChange={this.handleChange}
             />
-          </label>
+          
 
           <label htmlFor="password">
             Mot de passe
+            </label>
           <input
               type="password"
               id="password"
@@ -71,8 +75,8 @@ import { bindActionCreators } from 'redux';
               value={password}
               onChange={this.handleChange}
             />
-          </label>
-          <button type="submit">Connect me !</button>
+          
+          <Button light type="submit">Se connecter</Button>
         </form>
       </div>
     )

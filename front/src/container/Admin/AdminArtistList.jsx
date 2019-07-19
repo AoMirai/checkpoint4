@@ -4,7 +4,9 @@ import { NotificationManager } from 'react-notifications';
 import { bindActionCreators } from 'redux'
 import { asyncFetchArtists } from '../../actions/artists'
 import { asyncFetchActs } from '../../actions/acts';
+import { Button } from 'reactstrap';
 import AdminArtist from './AdminArtist';
+import './AdminArtist.scss'
 
 class AdminArtistList extends Component {
   constructor(props) {
@@ -33,7 +35,7 @@ class AdminArtistList extends Component {
   submitForm = (event) => {
     event.preventDefault();
     const { asyncFetchArtists } = this.props;
-    const {collapse, ...artist} = this.state;
+    const { collapse, ...artist } = this.state;
     fetch('http://localhost:5000/api/artist', {
       method: 'POST',
       headers: {
@@ -42,19 +44,19 @@ class AdminArtistList extends Component {
       },
       body: JSON.stringify(artist)
     })
-    .then(() => {
-      console.log(artist);
-      NotificationManager.success('', `Enregistement de ${artist.firstname} ${artist.lastname}`, 1000);
-      this.toggle();
-      this.setState({firstname: '', lastname: ''})
-      asyncFetchArtists();
+      .then(() => {
+        console.log(artist);
+        NotificationManager.success('', `Enregistement de ${artist.firstname} ${artist.lastname}`, 1000);
+        this.toggle();
+        this.setState({ firstname: '', lastname: '' })
+        asyncFetchArtists();
 
-    })      
-    .catch((err) => {
-      console.log(err);
-      NotificationManager.error('', "Erreur lors de l'entregristement de l'artiste.", 3000);
-      throw new Error();
-    });
+      })
+      .catch((err) => {
+        console.log(err);
+        NotificationManager.error('', "Erreur lors de l'entregristement de l'artiste.", 3000);
+        throw new Error();
+      });
   }
 
   render() {
@@ -62,8 +64,8 @@ class AdminArtistList extends Component {
     const { collapse } = this.state
     return (
       <div className="AdminArtistList">
-        <h3>Admin Artist</h3>
-        <button onClick={this.toggle}>Ajouter un artiste</button>
+          <h3 className="titre">Admin Artist</h3>
+          <Button className="add" color="success" onClick={this.toggle}>Ajouter un artiste</Button>
         {collapse ?
           <form onSubmit={this.submitForm}>
             <input
@@ -71,14 +73,17 @@ class AdminArtistList extends Component {
               id="firstname"
               name="firstname"
               onChange={this.handleChange}
+              placeholder="Prénom"
             />
             <input
               type="text"
               id="lastname"
               name="lastname"
               onChange={this.handleChange}
+              placeholder="Nom"
             />
-          <button type="submit">Enregistrer</button>
+            <Button color="success" type="submit">Enregistrer</Button>
+            <Button onClick={this.toggle}>Annuler</Button>
           </form>
           : ''
         }

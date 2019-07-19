@@ -1,54 +1,80 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import SignOut from '../Connection/SignOut';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import './Navbar.scss'
 
-function Navbar({ token }) {
-  return (
-    <div className="Navbar">
-      <ul>
-      {token ?
-        <div className="nav-admin">
-          Admin :
-            <li>
-            <SignOut />
-          </li>
-          <li>
-            <Link to="/admin/artist" >Artistes</Link>
-          </li>
-          <li>
-            <Link to="/admin/act" >Numéros</Link>
-          </li>
-          <li>
-            <Link to="/admin/show" >Représentations</Link>
-          </li>
-        </div>
-        :
-        <div className="nav-visitor">
-          <div>
-          <li>
-            <Link to="/">Acceuil</Link>
-          </li>
-          <li>
-            <Link to="/act">Numéros</Link>
-          </li>
-          <li>
-            <Link to="/box-office">Billetterie</Link>
-          </li>
-          </div>
-          <div>
-          <Link to="/signin">Admin</Link>
-          </div>
-        </div>
-      }
-      </ul>
-    </div >
-  )
+class CompNavbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: true
+    };
+  }
+  toggleNavbar = () => {
+    this.setState( prevState => ({
+      collapsed: !prevState.collapsed,
+    }));
+  }
+
+  render() {
+    const { token } = this.props;
+    const { collapsed } = this.state
+    return (
+      <div className="Navbar">
+        {token ?
+          <Navbar color="faded" light expand="md">
+            <NavbarBrand to="/" className="mr-auto">Wild Circus Admin</NavbarBrand>
+            <NavbarToggler onClick={this.toggleNavbar} />
+            <Collapse isOpen={!collapsed} navbar>
+              <Nav navbar className="nav-visitor ml-auto">
+                <NavItem>
+                  <NavLink tag={Link} to="/admin/artist">Artistes</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/admin/act">Numéros</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/admin/show">Représentations</NavLink>
+                </NavItem>
+                <NavItem>
+                  <SignOut/>
+                </NavItem>
+              </Nav>
+            </Collapse>
+          </Navbar>
+          :
+          <Navbar color="faded" light expand="md">
+            <NavbarBrand to="/" className="mr-auto">Wild Circus</NavbarBrand>
+            <NavbarToggler onClick={this.toggleNavbar} />
+            <Collapse isOpen={!collapsed} navbar>
+              <Nav navbar className="nav-admin ml-auto">
+                <NavItem>
+                  <NavLink tag={Link} to="/">Acceuil</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/act">Numéros</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={Link} to="/box-office">Billetterie</NavLink>
+                </NavItem>
+                <NavItem className="admin">
+                  <NavLink tag={Link} to="/signin">Admin</NavLink>
+                </NavItem>
+              </Nav>
+            </Collapse>
+          </Navbar>
+        }
+
+      </div >
+    )
+  }
 }
 
 const mapStateToProps = (state) => ({
-  token: state.user.token
+  token: state.user.token,
 })
 
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps)(CompNavbar)

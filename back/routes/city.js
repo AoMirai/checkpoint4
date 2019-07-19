@@ -20,8 +20,14 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const formData = req.body;
-  connection.query('INSERT INTO city SET ?', formData, () => {
-    res.sendStatus(200);
+  connection.query('INSERT INTO city SET ?', formData, (err) => {
+    if (err) {
+      console.log(err);
+      
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(200);
+    }
   });
 });
 

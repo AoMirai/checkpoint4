@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NotificationManager } from 'react-notifications';
+import { Button } from 'reactstrap';
 import { asyncFetchActs } from '../../actions/acts';
 
 
@@ -45,14 +46,13 @@ class AdminAct extends Component {
 
       })
       .catch((err) => {
-        console.log(err);
         NotificationManager.error('', "Erreur lors de l'entregristement du numéro", 3000);
         throw new Error();
       });
   }
 
   addActArtist = () => {
-    const { asyncFetchActs, id } = this.props;
+    const { asyncFetchActs, id, artists } = this.props;
     const { idArtist } = this.state;
     const artist = { id_artist: idArtist, id_act: id };
     fetch(`http://localhost:5000/api/act/artist`, {
@@ -64,20 +64,19 @@ class AdminAct extends Component {
       body: JSON.stringify(artist)
     })
       .then(() => {
-        NotificationManager.success('', `Enregistement de l'association du numéro à ${artist.title} ${artist.description}`, 2000);
+        NotificationManager.success('', `Enregistement de l'association du numéro à ${artists[idArtist].firstname}}`, 2000);
         this.toggle();
         asyncFetchActs();
 
       })
       .catch((err) => {
-        console.log(err);
         NotificationManager.error('', "Erreur lors de l'entregristement de l'association.", 3000);
         throw new Error();
       });
   }
 
   supprActArtist = () => {
-    const { asyncFetchActs, id } = this.props;
+    const { asyncFetchActs, id, artists } = this.props;
     const { idArtist } = this.state;
     const artist = { id_artist: idArtist, id_act: id };
     fetch(`http://localhost:5000/api/act/${id}/artist/${idArtist}`, {
@@ -89,7 +88,7 @@ class AdminAct extends Component {
       body: JSON.stringify(artist)
     })
       .then(() => {
-        NotificationManager.success('', `Suppression de l'association du numéro à ${artist.title} ${artist.description}`, 2000);
+        NotificationManager.success('', `Suppression de l'association du numéro à ${artists[idArtist].firstname}`, 2000);
         this.toggle();
         asyncFetchActs();
 
@@ -101,15 +100,37 @@ class AdminAct extends Component {
       });
   }
 
+  supprAct = () => {
+    const { asyncFetchActs, id } = this.props;
+    fetch(`http://localhost:5000/api/act/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(() => {
+        NotificationManager.success('', `Suppression du numéro `, 2000);
+        this.toggle();
+        asyncFetchActs();
+
+      })
+      .catch((err) => {
+        console.log(err);
+        NotificationManager.error('', "Erreur lors de la suppression du numéro", 3000);
+        throw new Error();
+      });
+  }
+
   render() {
     const { artists, actArtists } = this.props
     const { title, description, picture } = this.state
     const { collapse } = this.state
     return (
-      <div className="AdminArtist">
+      <div className="AdminAct" style={{backgroundImage: `url(${picture})`, backgroundSize: 'cover' }}>
         {
           collapse ?
-            <form onSubmit={this.submitForm}>
+            <form  className="modif" onSubmit={this.submitForm}>
               <input
                 type="text"
                 id="title"
@@ -131,48 +152,49 @@ class AdminAct extends Component {
                 value={description}
                 onChange={this.handleChange}
               />
-              <button type="submit">Enregistrer</button>
-              <button onClick={this.toggle}>Annuler</button>
+              <Button color="success" type="submit">Enregistrer</Button>
+              <Button onClick={this.toggle}>Annuler</Button>
 
             </form>
             :
-            <div>
+            <div className="act modif">
               <h4>
                 {title}
-                <button onClick={this.toggle}>Modifier le numéro</button>
-                <button>Supprimer le numéro</button>
               </h4>
               <p>{description}</p>
-
             </div>
 
         }
 
-        <div>
+        <div className="modif artist">
           {' Artistes : '}
           {actArtists ?
-            <span>
+            <div>
               {actArtists.map(artist => artist.fullname).join(', ')}
               {collapse ?
                 <div>
                   <select name="idArtist" id="idArtist" onChange={this.handleChange}>
                     {artists.map(artist => (
-                      <option id={artist.id} value={artist.id} name={artist.id}>
+                      <option key={artist.id} id={artist.id} value={artist.id} name={artist.id}>
                         {artist.firstname}
                         {' '}
                         {artist.lastname}
                       </option>
                     ))}
                   </select>
-                  <button onClick={this.addActArtist}>Ajouter l'artiste</button>
-                  <button onClick={this.supprActArtist}>Supprimer l'artiste</button>
+                  <Button color="success" onClick={this.addActArtist}>Ajouter l'artiste</Button>
+                  <Button color="danger" onClick={this.supprActArtist}>Supprimer l'artiste</Button>
                 </div>
                 : ''
               }
-            </span>
+            </div>
             : ''
           }
         </div>
+          <div className="modif buttons">
+          <Button color="success" onClick={this.toggle}>Modifier le numéro</Button>
+          <Button color="danger" onClick={this.supprAct}>Supprimer le numéro</Button>
+          </div>
       </div>
     )
   }

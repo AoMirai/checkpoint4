@@ -1,0 +1,37 @@
+.AdminShowList {
+  margin-top: 20px;
+  .titre {
+  text-align: center;
+  }
+  .add {
+    margin-left: 10px;
+  }
+  button {
+    margin: 5px;
+  }
+  .AdminShow {
+    background-color: rgba(105, 201, 121, 0.61);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    @media (min-width: 768px) {
+    flex-direction: row;
+    }
+    h4 {
+      align-self: center;
+    }
+    form {
+      width: auto;
+      input {
+        width: auto;
+      }
+    }
+    .modif {
+      padding: 5px;
+      margin: 5px;
+    }
+  }
+}

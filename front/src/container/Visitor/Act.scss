@@ -1,0 +1,16 @@
+.Acts {
+  .Act {
+    height: 450px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column-reverse;
+    .title, .artist {
+      margin: 5px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.384);
+
+    }
+  }
+}

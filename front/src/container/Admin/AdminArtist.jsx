@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NotificationManager } from 'react-notifications';
 import { asyncFetchArtists, asyncFetchArtistAct } from '../../actions/artists'
+import { Button } from 'reactstrap';
 
 
 class AdminArtist extends Component {
@@ -53,7 +54,7 @@ class AdminArtist extends Component {
   addActArtist = () => {
     const { asyncFetchArtists, id } = this.props;
     const { idAct } = this.state;
-    const artist = {id_artist: id, id_act: idAct};
+    const artist = { id_artist: id, id_act: idAct };
     fetch(`http://localhost:5000/api/act/artist`, {
       method: 'POST',
       headers: {
@@ -78,7 +79,7 @@ class AdminArtist extends Component {
   supprActArtist = () => {
     const { asyncFetchArtists, id } = this.props;
     const { idAct } = this.state;
-    const artist = {id_artist: id, id_act: idAct};
+    const artist = { id_artist: id, id_act: idAct };
     fetch(`http://localhost:5000/api/act/${idAct}/artist/${id}`, {
       method: 'DELETE',
       headers: {
@@ -100,6 +101,28 @@ class AdminArtist extends Component {
       });
   }
 
+  supprArtist = () => {
+    const { asyncFetchArtists, id } = this.props;
+    fetch(`http://localhost:5000/api/artist/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(() => {
+        NotificationManager.success('', `Suppression de l'artiste `, 2000);
+        this.toggle();
+        asyncFetchArtists();
+
+      })
+      .catch((err) => {
+        console.log(err);
+        NotificationManager.error('', "Erreur lors de la suppression de l'artiste", 3000);
+        throw new Error();
+      });
+  }
+
   render() {
     const { acts, artistActs } = this.props
     const { firstname, lastname } = this.state
@@ -108,7 +131,7 @@ class AdminArtist extends Component {
       <div className="AdminArtist">
         {
           collapse ?
-            <form onSubmit={this.submitForm}>
+            <form className="modif" onSubmit={this.submitForm}>
               <input
                 type="text"
                 id="firstname"
@@ -116,6 +139,7 @@ class AdminArtist extends Component {
                 value={firstname}
                 onChange={this.handleChange}
               />
+              <br></br>
               <input
                 type="text"
                 id="lastname"
@@ -123,8 +147,9 @@ class AdminArtist extends Component {
                 value={lastname}
                 onChange={this.handleChange}
               />
-              <button type="submit">Enregistrer</button>
-              <button onClick={this.toggle}>Annuler</button>
+              <br></br>
+              <Button color="success" type="submit">Enregistrer</Button>
+              <Button onClick={this.toggle}>Annuler</Button>
 
             </form>
             :
@@ -132,34 +157,37 @@ class AdminArtist extends Component {
               {firstname}
               {' '}
               {lastname}
-              <button onClick={this.toggle}>Modifier l'artiste</button>
-              <button>Supprimer l'artiste</button>
             </h4>
         }
-
-        <div>
+        <div className="modif">
           {' Numéros : '}
           {artistActs ?
-            <span>
+            <div>
               {artistActs.map(act => act.title).join(', ')}
               {collapse ?
-                <div>
+                <div  >
                   <select name="idAct" id="idAct" onChange={this.handleChange}>
                     {acts.map(act => (
                       <option id={act.id} value={act.id} name={act.id}>{act.title}</option>
                     ))}
                   </select>
-                  <button onClick={this.addActArtist}>Ajouter le numéro</button>
-                  <button onClick={this.supprActArtist}>Supprimer le numéro</button>
+                  <br></br>
+
+                  <Button color="success" onClick={this.addActArtist}>Ajouter le numéro</Button>
+                  <Button color="danger" onClick={this.supprActArtist}>Supprimer le numéro</Button>
                 </div>
                 : ''
               }
-
-            </span>
+            </div>
             : ''
           }
         </div>
-      </div>
+        <div className="modif">
+          < Button color="success" onClick={this.toggle}>Modifier l'artiste</Button>
+          <Button color="danger" onClick={this.supprArtist}>Supprimer l'artiste</Button>
+        </div>
+
+      </div >
     )
   }
 }

@@ -1,0 +1,48 @@
+.Shows {
+  .bot{
+    vertical-align: bottom;
+  }
+  .top{
+   vertical-align: top;
+  }
+  .price th{
+    padding:3px;
+  }
+  .price td{
+    border-top:solid;
+  }
+  .btop{
+    border-top:solid;
+  }
+  text-align:center;
+  .tribune {
+    background-color: rgba(105, 201, 121, 0.61);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    img {
+      width: 30%;
+    }
+  }
+  .Show {
+    background-color: rgba(105, 201, 121, 0.61);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    .title {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    }
+    .reserver {
+    border-top: solid black 1px;
+
+    }
+  }
+}

@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import {
   NotificationManager,
 } from 'react-notifications';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'reactstrap'
 import { userDisconnect } from '../../actions/user';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
 class SignOut extends Component {
@@ -23,9 +24,7 @@ class SignOut extends Component {
 
   render() {
     return (
-      <div onClick={this.disconnect}>
-        <Link to='/'>Déconnection</Link>
-      </div>
+        <NavLink  tag={Link} onClick={this.disconnect} className="SignOut" to='/signin'>Déconnection</NavLink>
     )
   }
 }

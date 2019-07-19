@@ -1,0 +1,28 @@
+.SignIn {
+  margin-top: 20px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+
+  button {
+    margin: 15px;
+    width: 150px;
+  }
+  form {
+    align-self: center;
+    background-color: rgba(105, 201, 121, 0.61);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    label {
+      margin : 5px;
+    }
+  }
+}

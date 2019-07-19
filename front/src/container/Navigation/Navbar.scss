@@ -1,0 +1,17 @@
+.Navbar {
+  background-color: rgb(173, 45, 45);
+  .nav-item a {
+    cursor: pointer;
+  }
+  .navbar-brand {
+    color: black;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    color: black;
+    &:hover{
+      color: black;
+      background-color: rgb(206, 56, 56);
+      border-radius: 15px;
+    }
+  }
+}

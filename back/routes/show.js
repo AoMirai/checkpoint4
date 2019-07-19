@@ -7,8 +7,9 @@ router.get('/', (req, res) => {
   const query = `SELECT
   s.id,
   s.date,
-  c.id cityName
-  FROM show s
+  c.name city,
+  s.id_city
+  FROM circusShow s
   JOIN city c
   ON s.id_city = c.id
   `;
@@ -23,7 +24,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const formData = req.body;
-  connection.query('INSERT INTO show SET ?', formData, () => {
+  connection.query('INSERT INTO circusShow SET ?', formData, () => {
     res.sendStatus(200);
   });
 });
@@ -31,8 +32,10 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   const idShow = req.params.id;
   const formData = req.body;
-  connection.query('UPDATE show SET ? WHERE id = ?', [formData, idShow], (err) => {
+  connection.query('UPDATE circusShow SET ? WHERE id = ?', [formData, idShow], (err) => {
     if (err) {
+      console.log(err);
+      
       res.sendStatus(500);
     } else {
       res.sendStatus(200);
@@ -42,7 +45,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const idShow = req.params.id;
-  connection.query('DELETE FROM show WHERE id = ?', [idShow], (err) => {
+  connection.query('DELETE FROM circusShow WHERE id = ?', [idShow], (err) => {
     if (err) {
       res.sendStatus(500);
     } else {

@@ -1,14 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import './Admin.scss'
+
 
 class Admin extends Component {
   render() {
+    const { userName } = this.props
     return (
       <div className="Admin">
-        Vous êtes sur la partie admin du site.
-        Choisisez une partie à moderer.
+        <p>
+          Bonjour, {userName}
+          <br></br>
+          Vous êtes sur la partie adminitrateur du site.
+        <br></br>
+          Choisisez une partie à moderer.
+        </p>
       </div>
     )
   }
 }
 
-export default Admin
+const mapStateToProps = (state) => ({
+  userName: state.user.name,
+})
+
+export default connect(mapStateToProps)(Admin);

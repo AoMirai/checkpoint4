@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import { asyncFetchActs } from '../../actions/acts';
 import { asyncFetchArtists } from '../../actions/artists';
 import AdminAct from './AdminAct';
+import { Button } from 'reactstrap';
+import './AdminAct.scss'
 
 class AdminActList extends Component {
   constructor(props) {
@@ -61,8 +63,8 @@ class AdminActList extends Component {
     const { collapse } = this.state
     return (
       <div className="AdminActList">
-        <h3>Admin Numéro</h3>
-        <button onClick={this.toggle}>Ajouter un numéro</button>
+        <h3 className="titre">Admin Numéro</h3>
+        <Button color="success" onClick={this.toggle}>Ajouter un numéro</Button>
         {collapse ?
           <form onSubmit={this.submitForm}>
             <input
@@ -77,7 +79,7 @@ class AdminActList extends Component {
               name="description"
               onChange={this.handleChange}
             />
-          <button type="submit">Enregistrer</button>
+          <Button color="success" type="submit">Enregistrer</Button>
           </form>
           : ''
         }
@@ -88,6 +90,7 @@ class AdminActList extends Component {
             title={act.title}
             description={act.description}
             actArtists={act.artists ? act.artists : []}
+            picture={act.picture}
           />
         )}
       </div>
