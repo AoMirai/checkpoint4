@@ -75,14 +75,15 @@ class Show extends Component {
           collapse ?
             <div className="reserver">
               <form>
-              <label htmlFor="tribune">Tribune :</label>
+              <label htmlFor="tribune">Tribune :
               <select name="tribune" id="tribune" onChange={this.handleChange}>
                 <option value="Familiale">Familiale</option>
                 <option value="Honneur">Honneur</option>
                 <option value="Privilège">Privilège</option>
                 <option value="Loges">Loges</option>
               </select>
-              <label htmlFor="adult">Adulte</label>
+              </label>
+              <label htmlFor="adult">Adulte
               <input
                 type="number"
                 id="adult"
@@ -90,7 +91,8 @@ class Show extends Component {
                 value={adult}
                 onChange={this.handleChange}
               />
-              <label htmlFor="child">Enfants</label>
+              </label>
+              <label htmlFor="child">Enfants
               <input
                 type="number"
                 id="child"
@@ -98,6 +100,7 @@ class Show extends Component {
                 value={child}
                 onChange={this.handleChange}
               />
+              </label>
             </form>
             Prix : {price} €
             </div>

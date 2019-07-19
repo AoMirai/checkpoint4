@@ -22,7 +22,7 @@ class Home extends Component {
     this.setState({ idAct: acts && acts[idAct + 1 ] ? idAct + 1 : 0 }, () => {
       setTimeout(() => {
         this.boucle()
-      }, 6000);
+      }, 3000);
     });
   };
 
@@ -32,8 +32,10 @@ class Home extends Component {
     return (
       <div className="Home">
         {acts && acts[idAct] ? <img src={acts[idAct].picture} alt="" /> : ''}
+        <div className="bienvenue">
         <h3>Bienvenue au Wild Circus !</h3>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione illo, cum sapiente eaque voluptate officia cumque quaerat veniam beatae quae nam autem perspiciatis perferendis veritatis repellendus aut iusto. Accusamus, consequuntur.</p>
+        </div>
       </div>
     )
   }

@@ -12,7 +12,7 @@ class Act extends Component {
   render() {
     const { title, description, picture, actArtists } = this.props;
     return (
-      <div className="Act" style={{ backgroundImage: `url(${picture})`, backgroundSize: 'cover' }}>
+      <div className="Act" style={{ backgroundImage: `url(${picture})`, backgroundSize: 'cover', backgroundPosition: '50% 10%'}}>
         <div className="artist">
           {' Artistes : '}
           {actArtists ?

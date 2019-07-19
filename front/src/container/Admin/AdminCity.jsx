@@ -105,7 +105,7 @@ class AdminCity extends Component {
 
   render() {
     const { citys } = this.props
-    const { name, collapseModif, collapseAdd, id, nameMofif } = this.state
+    const { name, collapseModif, collapseAdd, nameMofif } = this.state
     return (
       <div className="AdminCity">
         <h3>Admin Villes</h3>

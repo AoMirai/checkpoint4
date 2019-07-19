@@ -9,6 +9,25 @@
   button {
     margin: 5px;
   }
+
+  .add-act {
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    align-self: center;
+    margin-left: 10px;
+    button {
+      width: 200px;
+    }
+
+    input {
+      width: auto;
+    }
+    textarea {
+      width: 100%;
+      height: 50%;
+    }
+  }
   .AdminAct {
     background-color: rgba(105, 201, 121, 0.61);
     border-radius: 15px;
@@ -17,11 +36,16 @@
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    height: auto;
     @media (min-width: 768px) {
       flex-direction: row;
+      height: 350px;
     }
     form {
       width: auto;
+      @media (min-width: 768px) {
+        width: 45%;
+      }
       input {
         width: auto;
       }
@@ -31,19 +55,31 @@
       }
     }
     .modif {
-      padding: 5px;
+      padding: 15px;
       margin: 5px;
-      background-color: rgba(255, 255, 255, 0.384);
+      background-color: rgba(255, 255, 255, 0.493);
       border-radius: 15px;
-    }
-    .act {
+      align-self: center;
+      height: auto;
       @media (min-width: 768px) {
-        width: 45%;
+        height: 250px;
       }
-    }
-    .artist {
-      @media (min-width: 768px) {
-        width: 35%;
+      &.act {
+        @media (min-width: 768px) {
+          width: 45%;
+        }
+      }
+      &.artist {
+        @media (min-width: 768px) {
+          width: 35%;
+        }
+      }
+      &.buttons {
+        height: 125px;
+        align-self: center;
+        button {
+          width: 178px;
+        }
       }
     }
     .buttons{

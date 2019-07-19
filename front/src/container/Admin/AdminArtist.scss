@@ -15,7 +15,7 @@
     margin: 10px;
     padding: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: column;
     @media (min-width: 768px) {
     flex-direction: row;
@@ -29,6 +29,13 @@
     .modif {
       padding: 5px;
       margin: 5px;
+      &.buttons {
+        display: flex;
+        flex-direction: column;
+        button {
+          width: 159px;
+        }
+      }
     }
   }
 }

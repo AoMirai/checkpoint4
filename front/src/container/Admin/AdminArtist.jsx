@@ -182,7 +182,7 @@ class AdminArtist extends Component {
             : ''
           }
         </div>
-        <div className="modif">
+        <div className="modif buttons">
           < Button color="success" onClick={this.toggle}>Modifier l'artiste</Button>
           <Button color="danger" onClick={this.supprArtist}>Supprimer l'artiste</Button>
         </div>

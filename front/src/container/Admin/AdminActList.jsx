@@ -14,7 +14,8 @@ class AdminActList extends Component {
     this.state = {
       collapse: false,
       title: '',
-      description: ''
+      description: '',
+      picture: '',
     }
   }
 
@@ -64,13 +65,19 @@ class AdminActList extends Component {
     return (
       <div className="AdminActList">
         <h3 className="titre">Admin Numéro</h3>
-        <Button color="success" onClick={this.toggle}>Ajouter un numéro</Button>
+        <Button className="add" color="success" onClick={this.toggle}>Ajouter un numéro</Button>
         {collapse ?
-          <form onSubmit={this.submitForm}>
+          <form className="add-act" onSubmit={this.submitForm}>
             <input
               type="text"
               id="title"
               name="title"
+              onChange={this.handleChange}
+            />
+            <input
+              type="text"
+              id="picture"
+              name="picture"
               onChange={this.handleChange}
             />
             <textarea

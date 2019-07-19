@@ -10,7 +10,11 @@
       margin: 5px;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.384);
-
+    @media (min-width: 768px) {
+      position: relative;
+      width: 60%;
+      left: 20%;
+    }
     }
   }
 }

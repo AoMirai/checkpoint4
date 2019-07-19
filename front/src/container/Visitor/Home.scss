@@ -2,4 +2,18 @@
   img {
     width: 100%;
   }
+  .bienvenue{
+    text-align: center;
+    border-radius: 15px;
+    background-color: rgba(105, 201, 121, 0.61);
+    margin: 10px;
+    padding: 10px;
+    @media (min-width: 768px) {
+      left: 20%;
+      top: 30%;
+      position : absolute;
+      width: 60%;
+      background-color: rgba(255, 255, 255, 0.493);
+    }
+  }
 }

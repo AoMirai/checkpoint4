@@ -127,10 +127,10 @@ class AdminAct extends Component {
     const { title, description, picture } = this.state
     const { collapse } = this.state
     return (
-      <div className="AdminAct" style={{backgroundImage: `url(${picture})`, backgroundSize: 'cover' }}>
+      <div className="AdminAct" style={{backgroundImage: `url(${picture})`, backgroundSize: 'cover', backgroundPosition: '50% 10%' }}>
         {
           collapse ?
-            <form  className="modif" onSubmit={this.submitForm}>
+            <form  className="modif from" onSubmit={this.submitForm}>
               <input
                 type="text"
                 id="title"
